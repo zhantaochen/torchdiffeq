@@ -217,7 +217,7 @@ def _check_inputs(func, y0, t, rtol, atol, method, options, event_fn, SOLVERS):
         func = _TupleFunc(func, shapes)
         if event_fn is not None:
             event_fn = _TupleInputOnlyFunc(event_fn, shapes)
-    _assert_floating('y0', y0)
+    # _assert_floating('y0', y0)
 
     # Normalise method and options
     if options is None:

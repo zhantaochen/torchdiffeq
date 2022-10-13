@@ -90,11 +90,12 @@ class OdeintAdjointMethod(torch.autograd.Function):
                     _t = torch.as_strided(t, (), ())  # noqa
                     _y = torch.as_strided(y, (), ())  # noqa
                     _params = tuple(torch.as_strided(param, (), ()) for param in adjoint_params)  # noqa
-
+                    # print("\ncurrent time is: ", _t)
                     vjp_t, vjp_y, *vjp_params = torch.autograd.grad(
                         func_eval, (t, y) + adjoint_params, -adj_y,
                         allow_unused=True, retain_graph=True
                     )
+                    # len(vjp_params.shape)
 
                 # autograd.grad returns None if no gradient, set to zero.
                 vjp_t = torch.zeros_like(t) if vjp_t is None else vjp_t
